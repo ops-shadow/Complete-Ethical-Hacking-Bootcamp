@@ -72,7 +72,7 @@ Papers: No Results
 $ locate jsp/webapps/42966.py                                                                   
 /usr/share/exploitdb/exploits/jsp/webapps/42966.py
 ```
-## Pesquisa com Script Nmap (NSE)
+## Usando Script Nmap (NSE)
 
 - Misto de scan com vunerabilidade
 - O sripts estão localizado na pasta `usr/share/nmap/scripts`
@@ -125,8 +125,10 @@ Post-scan script results:
 Nmap done: 1 IP address (1 host up) scanned in 30.76 seconds
 ```
 Considerando a primeira vunerabilidade encontrada:
+
 `21/tcp   open  ftp
 |_ftp-anon: Anonymous FTP login allowed (FTP code 230)`
+
 Podemos facilmente nos ogar no alvo através da porta de ftp com o user Anonymous, senha qualquer.
 ```
 $ ftp 192.168.1.33 21
@@ -148,6 +150,7 @@ Para conhecer as categorias de scripts, [visite o website do nmap](https://nmap.
 Os scripts do namap estão localizdos no diretório `/usr/share/nmap/scripts/`. 
 
 **Exemplo:**
+
 Se quiser saber os sripts sobre os serviços ftp.
 ```
 $ ls /usr/share/nmap/scripts/ | grep ftp
