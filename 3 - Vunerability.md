@@ -211,7 +211,7 @@ A alternativa gratuita ao Nessus é o OpenVAS/GVM, mas é mais complexo o seu us
 
 **Inciando o Nessus:**
 - No terminal: `$ sudo systemctl start nessusd`
-- No web browser: `https://localhost:8834`
+- No web browser: [`https://localhost:8834`](https://localhost:8834)
 
 **Encerrando o Nessus:**
 - No terminal: `$ sudo systemctl stop nessusd`
@@ -224,7 +224,7 @@ A alternativa gratuita ao Nessus é o OpenVAS/GVM, mas é mais complexo o seu us
 
 **Inciando o Nessus:**
 - No terminal: `$ sudo gvm-start`
-- No web browser: `https://127.0.0.1:9392`
+- No web browser: [`https://127.0.0.1:9392`](https://127.0.0.1:9392)
 
 **Encerrando o Nessus:**
 - No terminal: `$ sudo gvm-stop`
