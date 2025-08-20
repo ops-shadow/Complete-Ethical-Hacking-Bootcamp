@@ -205,4 +205,16 @@ Nmap done: 1 IP address (1 host up) scanned in 0.40 seconds
 ```
 ## Utiizando o Nessus
 
+O Nessus é uma ferramanta paga com alto custo. Contudo a Tenable disponibiliza uma versão gratuita - Nessus Essential, limitada a 16 IPs.
+
+A alternativa gratuita ao Nessus é o OpenVAS/GVM, mas é mais complexo o seu uso.
+
+**Inciando o Nessus:**
+- No terminal: `$ sudo systemctl start nessusd`
+- No web browser: `https://localhost:8834`
+
+**Encerrando o Nessus:**
+- No terminal: `$ sudo systemctl stop nessusd`
+
+
 
