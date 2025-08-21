@@ -1,6 +1,6 @@
 # Captura de email
 
-### theHarvester
+## theHarvester
 `# theHarvester -d {domínio} -b {bing, google..., all} -l {limite do número de resultados de pesquisa - default=500}
 
 Nem sempre irá funcionar. Em caso de falha, tente novamente ou use outras ferramentas.
@@ -14,9 +14,9 @@ Entrega:
 - pessoas,
 - hosts
 
-### Programas Python
+## Programas Python
 
-#### EmailHarvester
+### EmailHarvester
 `$ python EmailHarvester.py -d {domínio} -e {máquina de pesquisa}`
 
 options:
@@ -35,11 +35,11 @@ options:
   -p, --list-plugins    List all available plugins.
 ```
 
-#### email-scarper 
+### email-scarper 
 `$ python email-scarper.py                                                                    
 [+] Enter Target URL To Scan: https://{domínio}`
 
-### Spidefoot
+## Spidefoot
 
 `$ spiderfoot -l 127.0.0.1:5001`
 
@@ -50,7 +50,7 @@ Abra no navegador e acesse:
 
 Traz diversas informações como host, etc.
 
-### Recon-ng 
+## Recon-ng 
 
 O **Recon-ng** é um framework de OSINT em modo CLI (parecido com o Metasploit) e possui módulos para coletar e-mails de várias fontes.
 
@@ -82,7 +82,7 @@ Depois faça o mesmo para os outros módulos que instalou.
 `[recon-ng][teste] > show contacts`
 <br>Isso lista todos os e-mails coletados até o momento.
 
-### Matelgo
+## Matelgo
 
 Ferramenta de OSINT (Open Source Intelligence) e link analysis usada para coletar, cruzar e visualizar informações públicas sobre pessoas, empresas, domínios, endereços de e-mail, redes sociais, infraestrutura de rede e muito mais.
 
@@ -96,12 +96,3 @@ Ferramenta de OSINT (Open Source Intelligence) e link analysis usada para coleta
 - Descobrir perfis sociais.
 - Encontrar outros domínios usados pelo mesmo e-mail.
 - Verificar se aparecem em vazamentos de dados (HaveIBeenPwned, se o módulo estiver habilitado).
-
-## Usernames
-### Sherlock
-O Sherlock se baseia no fornecimento, pelos designers do site, de uma URL exclusiva para um nome de usuário registrado.
-Atualmente, a ferramenta é capaz de localizar usuários em mais de 300 redes sociais: Apple Developer, Arduino, Docker Hub, GitHub, GitLab, Facebook, BitCoinForum, CNET, IFTTT, Instagram, PlayStore, PyPI, Scribd, Telegram, TikTok, Tinder, etc.
-
-`$ sherlock {user1 user2 user3}`
-
-
