@@ -1,4 +1,4 @@
-# NETDISCOVER - Descobrindo hosts ativos na rede local
+# NETDISCOVER - Hosts ativos na rede local
 
 O **`netdiscover`** é uma ferramenta bem simples e útil em **pentests** ou administração de rede.
 
