@@ -1,6 +1,6 @@
 # Captura de endereços IP
 
-# Comando ping
+## Comando ping
 A forma mais simples é através do comando ping
 
 `$ ping {domínio}`
