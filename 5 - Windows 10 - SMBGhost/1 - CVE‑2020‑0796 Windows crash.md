@@ -102,6 +102,7 @@ TimeoutError: timed out
 ```
 ### Resultado
 Crash na máquina alvo.
-!Crash
+
+![Crash](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/efcc96552659d38513b7e63142cea1f8ceb58a37/5%20-%20Windows%2010%20-%20SMBGhost/crash_window.png)
 
 
