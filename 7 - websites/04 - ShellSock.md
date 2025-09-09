@@ -15,6 +15,7 @@ Shellshock é uma vunerabilidade antiga, improvável de ser encontrada atualment
 1. Abra o BurpSuite
 2. Na guia **Proxy**, abra o browser do BurpSuite. Ele já vem configurado com atribuições de proxy.
 3. No browser digite o IP da máquina alvo para abrir o seu website
+   ![website]("shellshock 1.png")
 4. Abra a aba **Target/SiteMap** do BurpSuite
 5. Clique no método GET ditetório /cgi-bin/status.
   - Obeserve a linha **User-agente** do **request**
