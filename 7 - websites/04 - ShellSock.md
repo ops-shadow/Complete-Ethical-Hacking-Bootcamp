@@ -19,6 +19,7 @@ Shellshock é uma vunerabilidade antiga, improvável de ser encontrada atualment
 4. Abra a aba **Target/SiteMap** do BurpSuite
 5. Clique no método GET ditetório /cgi-bin/status.
   - Obeserve a linha **User-agente** do **request**
+![BurpSuite - target](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb349b47077fbacf2a841edc84d40f4aaadef3a8/7%20-%20websites/shellshock%202.png)
   - Com o botão direito do mouse no painel **request**, selecione **send to repeater**
 6. Abra a aba **Repeater**, e substitua o coneteúdo do **User_agent** por `() { :;}; ` (comando nulo) seguido pelo comando que deseje executar na máquina alvo entre aspas simples (').
   - No exemplo, queremos abrir um netcat...
