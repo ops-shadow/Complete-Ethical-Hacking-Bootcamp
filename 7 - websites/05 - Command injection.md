@@ -65,7 +65,7 @@ Assim, é possível injetar umcomando malicioso no prompt.
   ```
 Essa vunerabilidade ocorre devido a falha de programação da página web, que aceita operadores que controlam como e quando os comandos são executados.
 
-## DVWA com Segurança baixa
+## DVWA com Segurança média
 
 Tentaremos novamente injetar um comando malicioso no prompt da página, mas desta vez com a segurança em nível médio.
 
@@ -76,12 +76,12 @@ Tentaremos novamente injetar um comando malicioso no prompt da página, mas dest
    - `comando &` -  comando é iniciado **em background**, liberando o terminal para outras tarefas.
    - `comando1 | comando2` - Conecta comandos: a saída de comando1 vira a entrada de comando2.
   - O primeiro opetrador (;) foi rejeitado, vamos para o seguinte:
-  - Operador &&: `192,168.1.10 && ls -la`
+  - Operador &&: `192.168.1.10 && ls -la`
     - Também não funcionou
-  - Operador &: `192,168.1.10 & ls -la`
+  - Operador &: `192.168.1.10 & ls -la`
     - A injeção funcionou.
     
-      !resultado injeção
+      ![resultado injeção](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/3ce8cccf9ccfd3fdd0cd25ac3dfa519a313cec41/7%20-%20websites/ci_7.png)
          
   - Operado |: `192,168.1.10 | ls -la`
     - De forma similar ao operado &, também funcionou.
@@ -138,5 +138,5 @@ O DVWA Command Execution é **projetado para bloquear tentativas de injeção de
 
 O nível High foi feito para simular um ambiente mais seguro, aplica validação rigorosa de entrada, usando funções como escapeshellcmd() ou preg_match() para filtrar comandos maliciosos. Isso impede injeções direta. Ele  mas ainda pode ser explorado com técnicas avançadas, especialmente se combinado com outras vulnerabilidades (como file upload ou XSS).
 
-
+Conclusão: a solução é robusta e impede a passagem de comandos maliciosos no prompt. É necessário explorar outras vunerabilidades, utilizações de ferramentas como o metasploit, para ter acesso a máquina.
 
