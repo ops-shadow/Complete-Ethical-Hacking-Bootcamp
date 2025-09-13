@@ -70,7 +70,7 @@ Ele **não é executado**.
 
 A página está filtrando. Contudo se passarmos variações do comando como
 * `<SCRIPT>alert("XSS found")</SCRIPT>` (em maiúculas), ou
-  ![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_06.png)
+  ![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_07.png)
 * `<scr<script>ipt>alert("XSS found")</script>` (ao filtrar a palavra *<script>* do comando, o comando original *<script>alert("XSS found")</script>* é reestabelecido.
   ![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_08.png)
 
