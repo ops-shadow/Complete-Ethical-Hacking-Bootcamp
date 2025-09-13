@@ -44,17 +44,17 @@ Com o uso do DVWA do metasploit, exploraremos a vunerabidade em reflected XSS, c
 
 A intenção da página é criar um texto de boa-vinda com o nome do usuário, como abaixo:
 
-!Comando
+![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_01.png)
 
-!Resposta
+![Resposta](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_02.png)
 
 Contudo, se passarmos um JavaScript... (`<script>alert("XSS found")</script>`)
 
-!Comando
+![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_03.png)
 
 Ele é executado.
 
-!Resposta
+![Resposta](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_04.png)
 
 Desta forma, podemos observar que a página não filtra a injeção de JavaScripts
 
@@ -62,21 +62,21 @@ Desta forma, podemos observar que a página não filtra a injeção de JavaScrip
 
 Ao tentar passarmos o mesmo JavaScript... (`<script>alert("XSS found")</script>`)
 
-!Comando
+![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_03.png)
 
 Ele **não é executado**.
 
-!Resposta
+![Resposta](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_05.png)
 
 A página está filtrando. Contudo se passarmos variações do comando como
 * `<SCRIPT>alert("XSS found")</SCRIPT>` (em maiúculas), ou
+  ![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_06.png)
 * `<scr<script>ipt>alert("XSS found")</script>` (ao filtrar a palavra *<script>* do comando, o comando original *<script>alert("XSS found")</script>* é reestabelecido.
-
-! Comando
+  ![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_08.png)
 
 O JavaScript é executado
 
-! Resposta
+![Resposta](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/5907fb7ed1333414369d0a182f45d6a0e5d7089c/7%20-%20websites/xss_04.png)
 
 ## Roubo de Cookie
 
