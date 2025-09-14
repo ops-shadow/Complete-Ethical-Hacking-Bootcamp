@@ -149,3 +149,10 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 
 ## XSS Stored
 
+### Nível baixo de segurança
+
+A página é destinada a envio de comentários. Após o usuário inserir seu nome e comentário e clicar em 'Sign guestbook', o comentário é inserido na página. Por exemplo:
+
+![Entrada](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/254a62ccbb7c656a3f040de78f4be8718b33f03e/7%20-%20websites/img/xss_11.png)
+
+![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/254a62ccbb7c656a3f040de78f4be8718b33f03e/7%20-%20websites/img/xss_12.png)
