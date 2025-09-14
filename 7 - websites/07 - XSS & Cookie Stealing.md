@@ -153,6 +153,21 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 
 A página é destinada a envio de comentários. Após o usuário inserir seu nome e comentário e clicar em 'Sign guestbook', o comentário é inserido na página. Por exemplo:
 
-![Entrada](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/254a62ccbb7c656a3f040de78f4be8718b33f03e/7%20-%20websites/img/xss_11.png)
+![Entrada](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/fd2c140e702f16d7c2bf9aae94f88082b62375fc/7%20-%20websites/img/xss_11.png)
 
-![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/254a62ccbb7c656a3f040de78f4be8718b33f03e/7%20-%20websites/img/xss_12.png)
+![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/fd2c140e702f16d7c2bf9aae94f88082b62375fc/7%20-%20websites/img/xss_12.png)
+
+A ideia é inserir um JavaScript em um dos campos e ver se ele é executado.
+* O campo name tem tamanho limitado...
+* Desta forma, vamos inserir o script no campo message
+
+![Entrada](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/fd2c140e702f16d7c2bf9aae94f88082b62375fc/7%20-%20websites/img/xss_13.png)
+
+Ao enviar as informações, obtemos:
+
+![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/fd2c140e702f16d7c2bf9aae94f88082b62375fc/7%20-%20websites/img/xss_14.png)
+
+![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/fd2c140e702f16d7c2bf9aae94f88082b62375fc/7%20-%20websites/img/xss_15.png)
+
+Conclusão: a página é vunerável ao ataque, e toda vez que alguém carregar a página, o script será executado. 
+
