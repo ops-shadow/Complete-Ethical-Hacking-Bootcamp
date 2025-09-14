@@ -167,7 +167,33 @@ Ao enviar as informações, obtemos:
 
 ![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/fd2c140e702f16d7c2bf9aae94f88082b62375fc/7%20-%20websites/img/xss_14.png)
 
-![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/fd2c140e702f16d7c2bf9aae94f88082b62375fc/7%20-%20websites/img/xss_15.png)
+![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/bf59267851df805dde3cbe0a13105099657d57e2/7%20-%20websites/img/xss_15.png)
 
 Conclusão: a página é vunerável ao ataque, e toda vez que alguém carregar a página, o script será executado. 
+
+## Nível médio de segurança
+
+Testamos `<script>alert('TE PEGUEI")</script>` e suas variações `<scr<script>ipt>alert('TE PEGUEI")</script>` e `<SCRIPT>alert('TE PEGUEI")</script>` no campo message sem sucesso. Parece que a filtragem no campo está funcionando.
+
+!xss_16
+
+Testaremos agora a opção de inserir o comando `<script>alert('TE PEGUEI")</script>` no campo name. Como vimos antes, o campo name está limitado, sendo necessário eliminar essa restrição.
+
+* Para alterar o tamanho do campo, inspencionamos a página e achamos a definição do campo
+  !xss_17
+* Em seguida alteramos o maxlenght para 30
+  !xss_18
+
+Agora tentamos inserir o script com `<script>alert('OI")</script>`, e não funcionou.
+!xss_19
+
+Repetimos o procedimento para inserir o script `<SCRIPT>alert('OI")</script>`, desta vez com sucesso
+
+!Xss_20
+
+!xss_21
+
+Conclusão: a página ainda é vunerável ao ataque (desta ves no campo name), e toda vez que alguém carregar a página, o script será executado. 
+
+
 
