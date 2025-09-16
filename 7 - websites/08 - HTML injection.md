@@ -10,7 +10,7 @@ Importante: **HTML Injection ≠ XSS.**
 * Se a injeção **não** permite executar JavaScript (por ex., `<script>` ou `onerror=` são bloqueados), é “só” HTML Injection.
 * Se for possível executar JS, então o problema já é **XSS**.
 
-**Riscos principais**
+**Riscos principais:**
 
 1. **Falsificação de conteúdo (content spoofing) e defacement**
    – Inserir títulos, textos, imagens e avisos falsos, arranhando a reputação do site.
@@ -34,3 +34,41 @@ Importante: **HTML Injection ≠ XSS.**
 | Principais riscos       | Phishing, spoofing, CSRF por GET, defacement | Roubo de sessão/dados, keylogging, pivot para outras APIs |
 | Gravidade típica        | Média (pode ser alta)                        | Alta                                                      |
 
+## Laboratório
+
+### Usando tag de formatação
+
+Usando o DVWA, a mesma página para *XSS Stored*, tentaremos inserir um código simples '<h1>Vulnerável</h1> no campo comentário.
+
+![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/24e40b509450a8b7eb59f94de65a6b81c13a3850/7%20-%20websites/img/html_01.png)
+
+Obtendo:
+
+![Resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/24e40b509450a8b7eb59f94de65a6b81c13a3850/7%20-%20websites/img/html_02.png)
+
+Observamos que a página aceitou a injeção do tag.
+
+### Seqquetrando a página
+
+Agora tentaremos usar um comando malicioso, com o objetivo de sequetrar a página redirecionando-a para outro website. Para isso utilizaremos o camando: `<meta http-equiv="refresh" content="0; url=https://ofuxico.com.br/">`.
+
+*Exlicando o código:*
+* *<meta>: Tag usada para fornecer metadados sobre o documento HTML*.
+*  *http-equiv="refresh": Simula um cabeçalho HTTP que diz ao navegador para "atualizar" ou "redirecionar"*.
+*  *content="0; url=...":*
+   *  *O número 0 indica o tempo de espera em segundos antes do redirecionamento*.
+   *  *O url define o destino da nova página*.
+
+![Comando](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/24e40b509450a8b7eb59f94de65a6b81c13a3850/7%20-%20websites/img/html_03.png)
+
+Observamos que o campo de comentário não é grande o suficiente para inserir o comando. Desta forma, ao inspecionar a página alteramos o maxlenght do campo para um valor maior.
+
+![Maxlenght](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/24e40b509450a8b7eb59f94de65a6b81c13a3850/7%20-%20websites/img/html_04.png)
+
+Agora, inserindo o código HTML...
+
+![Código](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/24e40b509450a8b7eb59f94de65a6b81c13a3850/7%20-%20websites/img/html_05.png)
+
+Resultado: todos os que abrirem a página serão redirecionados automaticamente para outro website. A página foi "sequestrada".
+
+![Resutado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/24e40b509450a8b7eb59f94de65a6b81c13a3850/7%20-%20websites/img/html_06.png)
