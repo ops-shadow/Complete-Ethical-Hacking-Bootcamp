@@ -115,9 +115,9 @@ O navegador envia a requisição com **cookies da sessão**.
 
 O ataque consiste em replicar a página do site, modifiando-a para inserir na troca de senha, a password que desejarmos e "roubar" o acesso.
 
-O HTML da página está no arquivo CSRF.html, e é basicamente o mesmo da página original com as seguintes modificações:
+O HTML da página está no arquivo [CSRF.html](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/0c0939d1cd0e6629c25777a586343ed6bb4874f9/7%20-%20websites/10.1%20-%20CSRF.html), e é basicamente o mesmo da página original com as seguintes modificações:
 
 * `<form action="http://192.168.1.33/dvwa/vulnerabilities/csrf/" method="GET">` - action direciona o usuário de volta ao website, após a mudança de senha.
 * `<input type="password" AUTOCOMPLETE="off" name="password_new" value="hacked">` - inserido `value="hacked"` para alterar o valor para a senha desejada.
 * `<input type="password" AUTOCOMPLETE="off" name="password_conf" value="hacked">` - de forma análoga, iserido `value="hacked"` na confirmação da senha.
-* Adicionalmente é copiado o arquivo main.css para o lacal de paǵina de ataque, e referenciado no cabeçalho do arquivo CSRF.html - `<link rel="stylesheet" type="text/css" href="main.css" />`
+* Adicionalmente é copiado o arquivo [main.css](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/0c0939d1cd0e6629c25777a586343ed6bb4874f9/7%20-%20websites/10.1%20-%20CSRF.html) para o lacal de paǵina de ataque, e referenciado no cabeçalho do arquivo [CSRF.html](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/0c0939d1cd0e6629c25777a586343ed6bb4874f9/7%20-%20websites/10.1%20-%20CSRF.html) - `<link rel="stylesheet" type="text/css" href="main.css" />`
