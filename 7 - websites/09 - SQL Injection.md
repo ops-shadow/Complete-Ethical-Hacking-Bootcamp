@@ -287,3 +287,4 @@ Injeção de SQL em que a aplicação não exibe erros ou dados diretamente. Mes
 * **Time-based:** a resposta demora quando a condição é verdadeira (ex.: SLEEP(5)).
 * **Out-of-band:** menos comum, a base faz uma requisição externa se a condição for verdadeira.
 
+As injeções de SQL deste exercício no metasploit são iguais a do exercício **In-band**.
