@@ -42,9 +42,11 @@ SQL Injection (SQLi) é uma vulnerabilidade que permite a um atacante “injetar
 
 ## In-band
 
-!Imagem
+![prompt](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/32c9f86bb96c76a3c8d280a9346be2259c4314cf/7%20-%20websites/img/SQL-1.png)
 
 1. Ao inserir um ID (1), a página retorna duas informações: First name: admin e Surname: admin; provavelmente dois campos de uma tabela.
+
+![resultado](https://github.com/ops-shadow/Complete-Ethical-Hacking-Bootcamp/blob/32c9f86bb96c76a3c8d280a9346be2259c4314cf/7%20-%20websites/img/SQL-2.png)
 
 2. Ao inserir ' como ID, é exibido o erro "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''''' at line 1", que é um forte indicativo quea página pode estar sujeita a injeção de SQL.
 
