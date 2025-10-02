@@ -110,3 +110,11 @@ O navegador envia a requisição com **cookies da sessão**.
 * Se o JWT fica **em storage** (local/session), CSRF cai, mas **XSS vira risco maior** (roubo de token).
 * Envie token CSRF em **header customizado** (`X-CSRF-Token`) e valide no backend.
 
+---
+## Metasploit2 CSRF
+
+O ataque consiste em replicar a página do site, modifiando-a para inserir na troca de senha, a password que desejarmos e "roubar" o acesso.
+
+O HTML da página está no arquivo xxxx, é basicamente o mesmo da página original com as seguintes modificações:
+
+*
