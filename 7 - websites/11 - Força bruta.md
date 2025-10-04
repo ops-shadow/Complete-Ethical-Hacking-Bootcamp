@@ -32,8 +32,9 @@ Tentativa sistemática de **adivinhar credenciais ou chaves** testando muitas co
 8. **Segregar superfícies**: limitar tentativas em interfaces expostas (VPN/SSO), proteger admin com IP allowlist.
 
 ---
+## Hydra
 
-## Ataque a página principal do DVWA com Hydra
+### Ataque a página inicial do DVWA (Login)
 
 Inspecionando a página...
 ```
@@ -67,9 +68,7 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-10-03 17:10:
 ```
 O Hydra achou dois logins válidos (a partir da lista).
 
----
-
-## Ataque a página /dvwa/vulnerabilities/brute/ 
+### Ataque a página /dvwa/vulnerabilities/brute/ 
 
 Inspencionando a página...
 ```
@@ -126,3 +125,9 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-10-03 20:56:
 Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-10-03 20:58:47
 ```
 O comando é executado com sucesso, como dois resultados positivos.
+
+---
+
+## Burp Suite Intruder
+
+
